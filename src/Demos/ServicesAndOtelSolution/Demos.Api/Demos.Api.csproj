@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Marten.AspNetCore" Version="8.9.0" />
+  </ItemGroup>
+
 </Project>
