@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddAuthentication().AddJwtBearer();
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddOpenApi();
 
@@ -53,7 +54,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseAuthentication();
+app.UseAuthentication(); // when requests come in, look at the Authorization header to determin the user's identity.
 app.UseAuthorization();
 // Route Table:
 // POST /vendors -> Create the Vendor Controllerr, and Call the AddVendorAsync Method.

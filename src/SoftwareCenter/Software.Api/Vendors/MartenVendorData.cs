@@ -5,15 +5,15 @@ using Software.Api.CatalogItems.Services;
 
 namespace Software.Api.Vendors;
 
-public class MartenVendorData(IDocumentSession session, HttpContext context ) : ICreateVendors, ILookupVendors, ICheckForVendors
+public class MartenVendorData(IDocumentSession session) : ICreateVendors, ILookupVendors, ICheckForVendors
 {
     public async Task<VendorDetailsModel> CreateVendorAsync(VendorCreateModel request)
     {
         // create the thing to save in the database, save it(?) return a VendorDetailsModel
         // create insert statement, run it the database.
         /// Mapping - Getting from Point A -> Point B
-     
-        var name = context.User?.Identity?.Name ?? "";
+
+        var name = "Samuel";
         var vendorToSave = request.MapToEntity(Guid.NewGuid(), name);
 
         session.Store(vendorToSave);
