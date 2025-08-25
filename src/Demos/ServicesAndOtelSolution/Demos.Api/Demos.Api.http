@@ -4,3 +4,6 @@ GET {{Demos.Api_HostAddress}}/
 Accept: application/json
 
 ###
+
+
+POST {{Demos.Api_HostAddress}}/

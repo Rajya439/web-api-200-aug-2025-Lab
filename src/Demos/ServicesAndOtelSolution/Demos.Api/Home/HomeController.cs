@@ -4,19 +4,23 @@ namespace Demos.Api.Home;
 
 public class HomeController : ControllerBase
 {
-    private ICountHits _hitCounter;
 
-    public HomeController(ICountHits hitCounter)
-    {
-        _hitCounter = hitCounter;
-    }
 
     [HttpGet("/")]
-    public async Task<Ok<HomePageResponse>> GetHome(CancellationToken token)
+    public async Task<Ok<HomePageResponse>> GetHome(
+        [FromKeyedServices("persistent")] ICountHits hitCounter,
+        CancellationToken token)
     {
-        
        
-        return TypedResults.Ok(new HomePageResponse(await _hitCounter.GetHitCount(token)));
+        return TypedResults.Ok(new HomePageResponse(await hitCounter.GetHitCount(token)));
+    }
+
+    [HttpPost("/")]
+    public async Task<Ok<HomePageResponse>> PostSomething(
+         [FromKeyedServices("non")] ICountHits hitCounter,
+        CancellationToken token)
+    {
+        return TypedResults.Ok(new HomePageResponse(await hitCounter.GetHitCount(token)));
     }
 }
 
