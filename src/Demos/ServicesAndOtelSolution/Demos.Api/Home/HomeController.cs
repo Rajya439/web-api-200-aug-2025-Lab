@@ -9,6 +9,7 @@ public class HomeController(ILogger<HomeController> logger) : ControllerBase
     [HttpGet("/")]
     public async Task<Ok<HomePageResponse>> GetHome(
         [FromServices] ICountHits hitCounter,
+        [FromServices] ClassDataService classDataService,
         CancellationToken token)
     {
 

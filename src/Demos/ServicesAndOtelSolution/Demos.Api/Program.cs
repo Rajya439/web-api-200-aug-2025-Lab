@@ -1,8 +1,26 @@
 using System.Globalization;
 using Demos.Api.Home;
 using Marten;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+//builder.Services.AddScoped<ClassDataService>(sp =>
+//{
+//    var options = new ClassDataServiceOptions { ConnectionString = "someDb", MaxStudents = 25, MinStucents = 8 };
+//    return new ClassDataService(options);
+
+//});
+//builder.Services.AddClassDataService((o) =>
+//{
+//    o.ConnectionString = "some connection string";
+//    o.MinStudents = 8;
+//    o.MaxStudents = 16;
+//});
+var config = builder.Configuration.GetSection(ClassDataServiceOptions.OptionsName);
+builder.Services.AddSingleton(config!); 
+
+builder.Services.AddSingleton<ClassDataService>();
+
 
 builder.Services.AddControllers();
 //builder.Services.AddTransient<HitCounter>(); // create a new one of these EVERY TIME any controller or service needs the HitCounter.
@@ -75,16 +93,35 @@ public class SomeSlowStartingService
 
 public class  ClassDataService
 {
-    public ClassDataService(ClassDataServiceOptions options)
+    public ClassDataService(IOptions<ClassDataServiceOptions> options)
     {
         // use those options to set up this service.
+        var cs = options.Value;
+        var x = cs.ConnectionString;
     }
     // use that stuff in here.
 }
 
 public class ClassDataServiceOptions
 {
-    public string ConnectionString { get; private set; } = string.Empty;
-    public int MaxStudents { get; private set; }
-    public int MinStucents { get; private set; }
+    public string ConnectionString { get; set; } = string.Empty;
+    public int MaxStudents { get;  set; }
+    public int MinStudents { get;  set; }
+
+    public static string OptionsName = "ClassDataService";
 };
+
+public static class ClassDataServiceExtensions
+{
+    public static IServiceCollection AddClassDataService(
+        this IServiceCollection services,
+        Action<ClassDataServiceOptions> configureOptions)
+    {
+        var options = new ClassDataServiceOptions();
+        configureOptions(options);
+        services.AddSingleton(options);
+        services.AddScoped<ClassDataService>();
+        return services;
+        
+    }
+}
