@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Metrics;
+﻿using System.Diagnostics;
+using System.Diagnostics.Metrics;
 
 namespace HelpDesk.Api.Employee.Issues;
 
@@ -11,9 +12,14 @@ public class IssueMetrics
         var meter = meterFactory.Create("HelpDesk.Api");
         _problemsCreated = meter.CreateCounter<int>("helpdesk.api.employees.problems_created");
     }
-    public void ProblemCreated()
+    public void ProblemCreated(string employeeId, Guid problemId)
     {
-        _problemsCreated.Add(1);
+        var tags = new TagList
+        {
+            { "employeeId", employeeId },
+            { "problemId", problemId.ToString() }
+        };
+        _problemsCreated.Add(1, tags);
     }
 }
 
