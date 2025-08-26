@@ -14,6 +14,7 @@ public class EmployeeIssueController : ControllerBase
         [FromServices] TimeProvider clock,
         [FromServices] IProvideUserInfo userService,
         [FromServices] IDocumentSession session,
+        [FromServices] IssueMetrics metrics,
         CancellationToken token
         )
     {
@@ -34,6 +35,7 @@ public class EmployeeIssueController : ControllerBase
         var entity = response.MapToEntity();
         session.Store(entity);
         await session.SaveChangesAsync();
+        metrics.ProblemCreated();
         // save this thing somewhere. 
         // Slime, too - because you can't GET that location and get the same response.
         return Created($"/employee/problems/{response.Id}", response);

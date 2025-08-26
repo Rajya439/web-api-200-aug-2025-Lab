@@ -1,6 +1,8 @@
 ﻿using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
+using Npgsql;
+using OpenTelemetry.Resources;
 
 namespace HelpDesk.Api;
 
@@ -19,7 +21,12 @@ public static class OtelExtensions
                 provider
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
+                   
                     .AddRuntimeInstrumentation();
+                provider.ConfigureResource(r =>
+                {
+                    r.AddService("HelpDesk.Api");
+                });
             }).WithTracing(options =>
             {
                 if (builder.Environment.IsDevelopment())
@@ -28,6 +35,7 @@ public static class OtelExtensions
                 }
 
                 options.AddAspNetCoreInstrumentation()
+                .AddNpgsql()
                     .AddHttpClientInstrumentation();
             });
         if (!string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]))

@@ -23,7 +23,7 @@ builder.Services.AddMarten(options =>
 {
     options.Connection(connectionString);
 }).UseLightweightSessions();
-
+builder.Services.AddSingleton<IssueMetrics>();
 
 builder.Services.AddSingleton<TimeProvider>(_ => TimeProvider.System);
 builder.Services.AddScoped<IProvideUserInfo, UserManager>();
