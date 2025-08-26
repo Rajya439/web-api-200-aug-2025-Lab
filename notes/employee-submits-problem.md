@@ -42,6 +42,8 @@ We send:
   - `CustomerContacted` - after the tech has contacted the customer
   - `ProblemResolved` - if the tech is able to resolve the problem during contact.
   - ?? Elevated? Etc.
+- reportedAt: The ISO 8601 of when the problem was reported
+- reportedBy: The `sub` claim of the person that reported the problem
 
 We need to validate the request - 
 
@@ -66,7 +68,8 @@ Content-Type: application/json
     }
 },
   "status": "AwaitingTechAssignment",
-  "reportedAt": "DateTimeIso"
+  "reportedAt": "DateTimeIso",
+  "reportedBy": "bob@company.com"
 }
 ```
 
