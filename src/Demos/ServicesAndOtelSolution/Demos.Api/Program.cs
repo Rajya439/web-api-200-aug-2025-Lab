@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddScoped<ClassDataService>(sp =>
 //{
-//    var options = new ClassDataServiceOptions { ConnectionString = "someDb", MaxStudents = 25, MinStucents = 8 };
+//    var options = new ClassDataServiceOptions { ConnectionString = "someDb", MaxStudents = 25, MinStudents = 8 };
 //    return new ClassDataService(options);
 
 //});
@@ -19,9 +19,9 @@ var builder = WebApplication.CreateBuilder(args);
 //var config = builder.Configuration.GetSection(ClassDataServiceOptions.OptionsName);
 var classOptions = new ClassDataServiceOptions();
 builder.Configuration.GetSection(ClassDataServiceOptions.OptionsName).Bind(classOptions);
-builder.Services.AddSingleton(classOptions); 
+//builder.Services.AddSingleton(classOptions); 
 
-builder.Services.AddSingleton<ClassDataService>();
+builder.Services.AddScoped<ClassDataService>();
 
 
 builder.Services.AddControllers();
@@ -107,8 +107,8 @@ public class  ClassDataService
 public class ClassDataServiceOptions
 {
     public string ConnectionString { get; set; } = string.Empty;
-    public int MaxStudents { get;  set; }
-    public int MinStudents { get;  set; }
+    public int MaxStudents { get; set; } = 16;
+    public int MinStudents { get; set; } = 8;
 
     public static string OptionsName = "ClassDataService";
 };
