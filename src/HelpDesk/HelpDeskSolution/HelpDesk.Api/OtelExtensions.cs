@@ -10,7 +10,7 @@ public static class OtelExtensions
     {
         builder.Logging.AddOpenTelemetry(logging =>
         {
-            logging.IncludeFormattedMessage = true; // logger.LogInformation("Got a request for {request}", request);
+           logging.IncludeFormattedMessage = true; // logger.LogInformation("Got a request for {request}", request);
         });
         builder.Services.AddMetrics()
             .AddOpenTelemetry()

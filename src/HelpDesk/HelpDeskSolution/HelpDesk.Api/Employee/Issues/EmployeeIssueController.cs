@@ -39,7 +39,7 @@ public class EmployeeIssueController : ControllerBase
         return Created($"/employee/problems/{response.Id}", response);
     }
 
-    [HttpGet("/employees/problems/{problemId:guid}")]
+    [HttpGet("/employee/problems/{problemId:guid}")]
     public async Task<ActionResult> GetProblemByIdAsync(Guid problemId,
         [FromServices]IDocumentSession session,
         CancellationToken token)

@@ -31,6 +31,10 @@ Content-Type: application/json
 
 ```
 
+```http
+GET http://localhost:1337/employee/problems/c72640f6-06ae-4de3-a920-c23e1ccc278c
+```
+
 ## Possible Manager Submitting an Issue on Behalf of the Employee
 
 ```http
