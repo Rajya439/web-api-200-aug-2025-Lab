@@ -18,11 +18,11 @@ Authorization: Bearer JWT
 Content-Type: application/json
 
 {
-  "softwareId": "33",
+  "softwareId": "bc3f26b0-4f07-41ad-8370-e73733afbe83",
   "description": "Text description of issue",
   "impact": "Inconvenience",
-  "impactRadius": "Personal",
-  "contactPreference": "Phone",
+  "impactRadius": 0,
+  "contactPreference": 0,
   "contactMechanisms": {
     "Phone": "555-1212",
     "Email": "bob@company.com"
