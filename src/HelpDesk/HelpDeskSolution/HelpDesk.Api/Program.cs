@@ -3,6 +3,8 @@
 using System.Text.Json;
 using HelpDesk.Api;
 using System.Text.Json.Serialization;
+using HelpDesk.Api.Employee.Issues;
+using HelpDesk.Api.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddOtel();
@@ -12,10 +14,12 @@ builder.Services.AddControllers().AddJsonOptions(
     {
         // options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseUpper; // ImpactRadius -> IMPACT_RADIUS
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); // No brainer.. Should be the default, imo. 
-        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Always;  // a little weirder, but I like it.
+        //options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;  // a little weirder, but I like it.
     });
 builder.Services.AddOpenApi();
 
+builder.Services.AddSingleton<TimeProvider>(_ => TimeProvider.System);
+builder.Services.AddScoped<IProvideUserInfo, UserManager>();
 
 var app = builder.Build();
 
