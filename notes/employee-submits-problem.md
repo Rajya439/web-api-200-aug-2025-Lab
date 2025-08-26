@@ -13,7 +13,7 @@ We need to know:
 - contactMechanisms: A map of phone and email.
 
 ```http
-POST /employee/problems
+POST http://localhost:1337/employee/problems
 Authorization: Bearer JWT
 Content-Type: application/json
 
@@ -30,6 +30,27 @@ Content-Type: application/json
 }
 
 ```
+
+## Possible Manager Submitting an Issue on Behalf of the Employee
+
+```http
+POST /employees/{idOfTheEmployee}/problems
+Authorization: Bearer JWT (role = manager)
+Content-Type: application/json
+
+{
+  "softwareId": "33",
+  "description": "Text description of issue",
+  "impact": "Inconvenience",
+  "impactRadius": "Personal",
+  "contactPreference": "Phone",
+  "contactMechanisms": {
+    "Phone": "555-1212",
+    "Email": "bob@company.com"
+  }
+}
+```
+
 
 ## Response
 
