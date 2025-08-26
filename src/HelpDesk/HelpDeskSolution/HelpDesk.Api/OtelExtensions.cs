@@ -25,8 +25,9 @@ public static class OtelExtensions
                     .AddRuntimeInstrumentation();
                 provider.ConfigureResource(r =>
                 {
-                    r.AddService("HelpDesk.Api");
-                });
+                    r.AddService("HelpDesk.Api", "helpdesk.api.employees.problems_created");
+                    
+                }).AddMeter("HelpDesk.Api");
             }).WithTracing(options =>
             {
                 if (builder.Environment.IsDevelopment())
