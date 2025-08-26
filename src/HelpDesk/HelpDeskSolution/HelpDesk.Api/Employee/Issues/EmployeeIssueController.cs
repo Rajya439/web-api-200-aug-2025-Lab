@@ -1,5 +1,6 @@
 ﻿
 
+using Marten;
 using Microsoft.AspNetCore.SignalR;
 
 namespace HelpDesk.Api.Employee.Issues;
@@ -12,6 +13,7 @@ public class EmployeeIssueController : ControllerBase
         [FromBody] SubmitIssueRequest request,
         [FromServices] TimeProvider clock,
         [FromServices] IProvideUserInfo userService,
+        [FromServices] IDocumentSession session,
         CancellationToken token
         )
     {
@@ -29,8 +31,28 @@ public class EmployeeIssueController : ControllerBase
             ReportedProblem = request,
             Status = SubmittedIssueStatus.AwaitingTechAssignment
         };
+        var entity = response.MapToEntity();
+        session.Store(entity);
+        await session.SaveChangesAsync();
         // save this thing somewhere. 
         // Slime, too - because you can't GET that location and get the same response.
         return Created($"/employee/problems/{response.Id}", response);
     }
-}
+
+    [HttpGet("/employees/problems/{problemId:guid}")]
+    public async Task<ActionResult> GetProblemByIdAsync(Guid problemId,
+        [FromServices]IDocumentSession session,
+        CancellationToken token)
+    {
+        var entity = await session.Query<EmployeeProblemEntity>().SingleOrDefaultAsync(p => p.Id == problemId);
+
+        if(entity is null)
+        {
+            return NotFound();
+        } else
+        {
+            var response = entity.MapToResponse();
+            return Ok(response);
+        }
+    }
+ }

@@ -8,7 +8,7 @@ public enum ProblemImpactRadius {  Personal, Customer}
 
 public enum ProblemContactPreference {  Phone, Email }
 
-public enum SubmittedIssueStatus {  AwaitingTechAssignment }
+public enum SubmittedIssueStatus {  AwaitingTechAssignment, UnsupportedSoftwareAwaitingReview }
 public record SubmitIssueRequest
 {
     public Guid SoftwareId { get; set; }
@@ -48,5 +48,18 @@ public record SubmitIssueResponse
 
     public DateTimeOffset ReportedAt { get; set; }
     public string ReportedBy { get; set; } = string.Empty;
+
+    public EmployeeProblemEntity MapToEntity()
+    {
+        return new EmployeeProblemEntity
+        {
+            Id = Id,
+            ReportedAt = ReportedAt,
+            ReportedBy = ReportedBy,
+            Status = Status,
+            ReportedProblem = ReportedProblem,
+
+        };
+    }
 
 }
