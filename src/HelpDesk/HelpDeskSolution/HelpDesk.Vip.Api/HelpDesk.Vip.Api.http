@@ -1,18 +1,18 @@
 @HelpDesk.Vip.Api_HostAddress = http://localhost:1338
 
 POST {{HelpDesk.Vip.Api_HostAddress}}/vips
-Accept: application/json
+Accept: image/jpg
 Content-Type: application/json
 
 {
-    "sub": "x8398392",
+    "sub": "joey@aol.com",
     "description": "My Golfing Buddy"
 }
 
 ###
 
 
-GET {{HelpDesk.Vip.Api_HostAddress}}/vips/1938f25b-44fe-482f-9ac0-b371e3e4175d
+GET {{HelpDesk.Vip.Api_HostAddress}}/vips/6e055be4-0f58-4272-b2b1-d5ad404234e9
 
 ###
 

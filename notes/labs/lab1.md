@@ -66,7 +66,7 @@ POST http://localhost:1338/vips
 Content-Type: application/json
 
 {
-    "sub": "sue@company.com",
+    "sub": "henry@company.com",
     "description": "Sue is the CEO, We need to make sure she is always able to be effective"
 }
 ```
@@ -89,7 +89,7 @@ Content-Type: application/json
 
 {
     "id": "Id as Guid",
-    "sub": "sue@company.com",
+    "sub": "carl@company.com",
     "description": "description from request",
     "addedOn": "ISO 8601 of the date this was added"
 }

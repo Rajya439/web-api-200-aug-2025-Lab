@@ -19,4 +19,4 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 app.MapControllers();
-app.Run();
+app.Run(); // <- here is when it is running! 

@@ -10,7 +10,7 @@ public class VipsController : ControllerBase
      * Note: This code is intentionally not "clean" and refactored. It is presented to promote understanding */
 
     // When they do a post to http://localhost:1338/vips
-    [HttpPost("/vips")]
+    [HttpPost("/vips")]  // "Flags" = metadata. 
     public async Task<ActionResult> AddVipAsync(
         [FromBody] VipCreateModel request, // Read the JSON of the request and populate this. The [ApiController] attribute will validate it first.
         [FromServices] IDocumentSession session, // The service I'll use to add it to the databse
@@ -55,10 +55,11 @@ public class VipsController : ControllerBase
     {
         // Get it from the database, if it has the same Id and hasn't been retired.
         var entity = await session.Query<VipEntity>().SingleOrDefaultAsync(v => v.Id == id && v.IsRetired == false);
-        if(entity is null)
+        if (entity is null)
         {
             return NotFound();
-        } else
+        }
+        else
         {
             // Map to a response model. Again.
             var response = new VipDetailsModel
@@ -82,19 +83,19 @@ public class VipsController : ControllerBase
         Guid id)
     {
         // Since I'm not using the route constraint, the default will be an empty guid for the id parameter, so we know not to bother the database.
-        if(id == Guid.Empty)
+        if (id == Guid.Empty)
         {
             return NoContent(); // No Content is the "Fine.", passive aggressive status code (204). I've got nothing else to tell you.
         }
         // See if it is in the database
         var vip = await session.Query<VipEntity>().SingleOrDefaultAsync(v => v.Id == id);
-        if(vip is null)
+        if (vip is null)
         {
             // If it isn't, return a success status code. Take credit for it!
             return NoContent();
         }
         // But if it IS in the database, and they aren't retired, they should be now.
-        if(vip.IsRetired == false)
+        if (vip.IsRetired == false)
         {
             vip.IsRetired = true;
             session.Store(vip);
@@ -113,7 +114,7 @@ public class VipsController : ControllerBase
         // Find that VIP and make sure they aren't retired, and map it to a VipDetailsModel list.
         var response = await session.Query<VipEntity>()
             .Where(v => v.IsRetired == false)
-            .Select(v => new VipDetailsModel { Id = v.Id, Sub = v.Sub, AddedOn = v.AddedOn, Description = v.Description})
+            .Select(v => new VipDetailsModel { Id = v.Id, Sub = v.Sub, AddedOn = v.AddedOn, Description = v.Description })
             .ToListAsync();
         return Ok(response);
     }
@@ -131,6 +132,13 @@ public record VipCreateModel
 }
 
 // Another "DTO" - what we are sending back.
+
+/*
+{
+    "sub": "sue@company.com",
+    "description": "Sue is the CEO, We need to make sure she is always able to be effective"
+}
+*/
 public record VipDetailsModel
 {
     public Guid Id { get; set; }
@@ -149,3 +157,7 @@ public class VipEntity
     public DateTimeOffset AddedOn { get; set; }
     public bool IsRetired { get; set; } = false;
 }
+
+
+
+
