@@ -35,7 +35,7 @@ public class EmployeeIssueController : ControllerBase
         var entity = response.MapToEntity();
         session.Store(entity);
         await session.SaveChangesAsync();
-        metrics.ProblemCreated(userSub, response.Id);
+        metrics.ProblemCreated(userSub, response.Id, request.SoftwareId);
         // save this thing somewhere. 
         // Slime, too - because you can't GET that location and get the same response.
         return Created($"/employee/problems/{response.Id}", response);
