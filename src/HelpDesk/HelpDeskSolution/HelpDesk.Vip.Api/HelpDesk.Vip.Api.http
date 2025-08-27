@@ -1,6 +1,23 @@
-@HelpDesk.Vip.Api_HostAddress = http://localhost:5126
+@HelpDesk.Vip.Api_HostAddress = http://localhost:1338
 
-GET {{HelpDesk.Vip.Api_HostAddress}}/weatherforecast/
+POST {{HelpDesk.Vip.Api_HostAddress}}/vips
 Accept: application/json
+Content-Type: application/json
+
+{
+    "sub": "x8398392",
+    "description": "My Golfing Buddy"
+}
 
 ###
+
+
+GET {{HelpDesk.Vip.Api_HostAddress}}/vips/1938f25b-44fe-482f-9ac0-b371e3e4175d
+
+###
+
+DELETE {{HelpDesk.Vip.Api_HostAddress}}/vips/1938f25b-44fe-482f-9ac0-b371e3e4175d
+
+###
+
+GET  {{HelpDesk.Vip.Api_HostAddress}}/vips
