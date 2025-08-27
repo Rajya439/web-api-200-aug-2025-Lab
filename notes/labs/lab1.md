@@ -66,8 +66,8 @@ POST http://localhost:1338/vips
 Content-Type: application/json
 
 {
-    "sub": "henry@company.com",
-    "description": "Sue is the CEO, We need to make sure she is always able to be effective"
+    "sub": "Bob@aol.com",
+    "description": "This is Bob Smith, the lead of the band The Cure, definitely a VIP"
 }
 ```
 
@@ -89,7 +89,7 @@ Content-Type: application/json
 
 {
     "id": "Id as Guid",
-    "sub": "carl@company.com",
+    "sub": "Bob@aol.com",
     "description": "description from request",
     "addedOn": "ISO 8601 of the date this was added"
 }

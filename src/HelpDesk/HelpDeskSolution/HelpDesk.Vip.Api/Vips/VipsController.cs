@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Marten;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HelpDesk.Vip.Api.Vips;
@@ -118,6 +119,15 @@ public class VipsController : ControllerBase
             .ToListAsync();
         return Ok(response);
     }
+
+    // [Authorize(Roles="HelpDeskApi")]
+    [HttpGet("/help-desk/vips")]
+    public async Task<ActionResult> GettheVipsFortheHelpDeskApi(CancellationToken token, [FromServices] IDocumentSession session)
+    {
+        var vips = await session.Query<VipEntity>().Where(v => v.IsRetired == false).Select(v => v.Sub).ToListAsync();
+        return Ok(vips);
+    }
+
 }
 
 
