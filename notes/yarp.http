@@ -1,0 +1,31 @@
+
+POST http://localhost:8000/helpdesk/employee/problems
+Authorization: Bearer JWT
+Content-Type: application/json
+
+{
+  "softwareId": "bc3f26b0-4f07-41ad-8370-e73733afbe83",
+  "description": "Text description of issue",
+  "impact": "Inconvenience",
+  "impactRadius": 0,
+  "contactPreference": 0,
+  "contactMechanisms": {
+    "Phone": "555-1212",
+    "Email": "jeff@company.com"
+  }
+}
+
+
+###
+
+POST http://localhost:8000/helpdesk/admin/vips
+Content-Type: application/json 
+
+{
+    "sub": "eljefe",
+    "description": "The Boss and the point man"
+}
+
+###
+
+GET http://localhost:8000/helpdesk/admin/vips
