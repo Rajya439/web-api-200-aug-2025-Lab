@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using JasperFx.CodeGeneration.Frames;
 using Marten;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SharedContracts;
 
 namespace HelpDesk.Vip.Api.Vips;
 [ApiController]
@@ -107,6 +109,7 @@ public class VipsController : ControllerBase
 
     }
 
+/* [ { id: "dd", sub: "jose", description: "big whiner, just take care of him", .. }, { ... } ] */    
     [HttpGet("/vips")]
     public async Task<ActionResult> GetAllVipsAsync(
         [FromServices] IDocumentSession session,
@@ -121,14 +124,18 @@ public class VipsController : ControllerBase
     }
 
     // [Authorize(Roles="HelpDeskApi")]
+    // [ "bob@aol.", "sue" ]
     [HttpGet("/help-desk/vips")]
     public async Task<ActionResult> GettheVipsFortheHelpDeskApi(CancellationToken token, [FromServices] IDocumentSession session)
     {
         var vips = await session.Query<VipEntity>().Where(v => v.IsRetired == false).Select(v => v.Sub).ToListAsync();
-        return Ok(vips);
+
+
+        return Ok(new HelpDeskVipResponse(vips, vips.Count()));
     }
 
 }
+
 
 
 // This is a "DTO" ("Data Transfer Object") - just a way for .NET to deserialize JSON into a .NET object we can work with.

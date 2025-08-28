@@ -36,10 +36,10 @@ public class VipNotificationBackgroundWorker(
         // When this runs (every 20 seconds ) AND if there are any problems, then ask the API for a list of VIPs
         if (problems.Any())
         {
-            List<string> vips = await vipsApi.GetCurrentVipsAsync(token);
+            var vipResponse = await vipsApi.GetCurrentVipsAsync(token);
             foreach(var problem in problems)
             {
-                if(vips.Contains(problem.ReportedBy))
+                if(vipResponse.Vips.Contains(problem.ReportedBy))
                 {
                     // send the Notification
                     logger.LogWarning("Need to send a notification for a vip {issue} (vip {vip})", problem.Id, problem.ReportedBy);
