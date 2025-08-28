@@ -5,14 +5,14 @@ Accept: image/jpg
 Content-Type: application/json
 
 {
-    "sub": "johnny@aol.com",
+    "sub": "sasmel@aol.com",
     "description": "My Golfing Buddy"
 }
 
 ###
 
 
-GET {{HelpDesk.Vip.Api_HostAddress}}/vips/2695a536-e3ec-4406-afa2-e1795136043c
+GET {{HelpDesk.Vip.Api_HostAddress}}/vips/d7653545-9137-4047-b146-bb2683643911
 
 ###
 

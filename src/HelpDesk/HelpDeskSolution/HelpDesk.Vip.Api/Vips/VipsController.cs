@@ -15,6 +15,7 @@ public class VipsController : ControllerBase
     // When they do a post to http://localhost:1338/vips
     [HttpPost("/vips")]  // "Flags" = metadata. 
     public async Task<ActionResult> AddVipAsync(
+        [FromServices] ISendVipsToTheSoftwareCenter softwareCenter,
         [FromBody] VipCreateModel request, // Read the JSON of the request and populate this. The [ApiController] attribute will validate it first.
         [FromServices] IDocumentSession session, // The service I'll use to add it to the databse
         [FromServices] TimeProvider clock) // I use this for ALL date/time stuff in APIs.
@@ -46,6 +47,18 @@ public class VipsController : ControllerBase
             AddedOn = entity.AddedOn
         };
         // Return a 201 Created, with a Location Header
+        // TODO: Make an HTTP Post to the Software Center to give them this new VIP.
+        try
+        {
+
+            await softwareCenter.SendSoftwareCenterNewVipAsync(response);
+        }
+        catch (Exception)
+        {
+
+            // Write this to a database table called "SoftwareCenterIsDrunkAgain", 
+            // have a background worker that just keeps retrying.
+        }
         return Created($"/vips/{response.Id}", response);
     }
 

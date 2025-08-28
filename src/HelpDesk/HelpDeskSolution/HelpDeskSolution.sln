@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E9915F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedContracts", "SharedContracts\SharedContracts.csproj", "{1CFF62AE-F041-473A-A8A4-D0A980664C8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpDesk.Vip.Api.Tests", "HelpDesk.Vip.Api.Tests\HelpDesk.Vip.Api.Tests.csproj", "{120AC3CB-63BF-4A2B-BFE5-101BBF4C3480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1CFF62AE-F041-473A-A8A4-D0A980664C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CFF62AE-F041-473A-A8A4-D0A980664C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CFF62AE-F041-473A-A8A4-D0A980664C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{120AC3CB-63BF-4A2B-BFE5-101BBF4C3480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{120AC3CB-63BF-4A2B-BFE5-101BBF4C3480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{120AC3CB-63BF-4A2B-BFE5-101BBF4C3480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{120AC3CB-63BF-4A2B-BFE5-101BBF4C3480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{AB4BF0A4-EB37-4917-AF00-02B8CAE1ED53} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{55C2F7C4-A896-4571-A3C3-A0FF7C0743E2} = {EE16D86F-63FE-47D3-BE3A-6DE8F92F56D7}
 		{1CFF62AE-F041-473A-A8A4-D0A980664C8D} = {E9915FB8-792E-42A5-920C-DE7BBBE694DF}
+		{120AC3CB-63BF-4A2B-BFE5-101BBF4C3480} = {EE16D86F-63FE-47D3-BE3A-6DE8F92F56D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BA1FEE4E-0D78-4FA0-BEB3-0AF2AF112FCB}
