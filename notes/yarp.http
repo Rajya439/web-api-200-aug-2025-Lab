@@ -22,7 +22,7 @@ POST http://localhost:8000/helpdesk/admin/vips
 Content-Type: application/json 
 
 {
-    "sub": "eljefe",
+    "sub": "Jeffry",
     "description": "The Boss and the point man"
 }
 
